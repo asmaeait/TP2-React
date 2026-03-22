@@ -1,30 +1,28 @@
+// Affichage dynamique de messages - Asma Ait El Mahjoub
 import { useState } from 'react';
 
-const messages = [
-  ' Premier clic !',
-  ' Deuxième clic !',
-  ' Troisième clic !',
-  ' Tu continues encore !',
-  ' Inarrêtable !',
+const niveaux = [
+  { texte: ' Premier pas !', couleur: 'green' },
+  { texte: ' Tu prends le rythme !', couleur: 'orange' },
+  { texte: ' En feu !', couleur: 'red' },
+  { texte: ' Inarrêtable !', couleur: 'purple' },
+  { texte: ' Légende !', couleur: 'blue' },
 ];
 
 function AffichageDynamique() {
   const [index, setIndex] = useState(0);
 
   function suivant() {
-    if (index < messages.length - 1) {
-      setIndex(index + 1);
-    } else {
-      setIndex(0);
-    }
+    setIndex((index + 1) % niveaux.length);
   }
 
   return (
     <div>
-      <p>
-        {messages[index]}
+      <p style={{ color: niveaux[index].couleur, fontWeight: 'bold' }}>
+        {niveaux[index].texte}
       </p>
-      <button onClick={suivant}>Cliquer</button>
+      <p>Étape {index + 1} sur {niveaux.length}</p>
+      <button onClick={suivant}>Suivant </button>
     </div>
   );
 }

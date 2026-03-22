@@ -1,16 +1,26 @@
+// Composant message dynamique - Asma Ait Elmahjoub
 import { useState } from 'react';
 
 function MessageBouton() {
   const [message, setMessage] = useState(' Salut ! Clique sur le bouton...');
+  const [clicked, setClicked] = useState(false);
 
-  function changerMessage() {
-    setMessage(' Bravo ! Tu as cliqué sur le bouton !');
+  function updateText() {
+    if (!clicked) {
+      setMessage(' Bravo ! Tu as cliqué sur le bouton !');
+      setClicked(true);
+    } else {
+      setMessage(' Salut ! Clique sur le bouton...');
+      setClicked(false);
+    }
   }
 
   return (
     <div>
       <p>{message}</p>
-      <button onClick={changerMessage}>Cliquer ici</button>
+      <button onClick={updateText}>
+        {clicked ? 'Réinitialiser ' : 'Cliquer ici '}
+      </button>
     </div>
   );
 }
